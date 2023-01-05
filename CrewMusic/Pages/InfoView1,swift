@@ -1,0 +1,101 @@
+
+
+import SwiftUI
+
+struct InfoView1: View {
+    @State private var mainImageName = "ico"
+    @State private var mainImageLabel = ""
+    @State var pushView = false
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    init (){
+        let standardAppearance = UITabBarAppearance()
+        
+        standardAppearance.backgroundColor = UIColor(named: "BackgroundColor2")
+        
+        UITabBar.appearance().standardAppearance = standardAppearance
+    }
+    
+    let defaultImage = "ico"
+    var body: some View {
+        
+        
+        ZStack{
+            GeometryReader{ geometry in
+            }.background(Rectangle()
+                            .ignoresSafeArea(.all)
+                            .foregroundColor(Color("BackgroundColor")))
+            GeometryReader{ geometry in
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea([.top,.bottom])
+                    .opacity(0.3)
+                    .blur(radius: 3)
+                    .frame(width: geometry.size.width)
+            }
+            Text("")
+                .navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading: Button(action : {
+                    self.mode.wrappedValue.dismiss()
+                }){
+                    Image("Back")
+                })
+            VStack{
+                Image(mainImageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(8.0)
+                    .shadow(radius: 10 )
+                HStack{
+                        Text(mainImageLabel)
+                            .fontWeight(.bold)
+                            .padding()
+                            .shadow(radius: 10 )
+                            .foregroundColor(Color("AccentColor2"))
+                            .font(.title)
+                }
+                HStack{
+                    CircularButton(imageName: "verde", mainImage: $mainImageName,mainLabel: $mainImageLabel, defaultName: defaultImage,teamMember: "Gennaro Verde")
+                        .padding(.trailing, 50.0)
+                    CircularButton(imageName: "militerno", mainImage: $mainImageName,mainLabel: $mainImageLabel, defaultName: defaultImage,teamMember: "Eugenio Militerno")
+                        .padding(.leading, 50.0)
+                        
+                }
+            
+                HStack {
+                    
+                           NavigationLink(
+                            destination: InfoView2())
+                             {
+                            Image("uniparthenope")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .shadow(radius: 10 )
+                            }
+                            .onTapGesture {self.pushView.toggle()}
+
+                }
+
+                HStack{
+                    CircularButton(imageName: "ruotolo", mainImage: $mainImageName,mainLabel: $mainImageLabel, defaultName: defaultImage,teamMember: "Pasquale Ruotolo")
+                        .padding(.trailing, 50.0)
+                        
+                    CircularButton(imageName: "laudato", mainImage: $mainImageName,mainLabel: $mainImageLabel, defaultName: defaultImage,teamMember: "Francesco Laudato")
+                        .padding(.leading, 50.0)
+                    
+                }.padding()
+            }
+            
+        }
+        
+    }
+}
+
+
+struct InfoView1_Previews: PreviewProvider {
+    static var previews: some View {
+        InfoView1()
+            .previewDevice("iPhone 11")
+    }
+}
