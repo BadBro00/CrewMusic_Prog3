@@ -1,7 +1,8 @@
 package JAVA;
+
 import java.net.URL;
-import JAVA.apiUser;
-public class Canzone {
+
+public class Canzone extends songInterface{
     private String title;
     private String album;
     private String artist;
@@ -24,5 +25,4 @@ public class Canzone {
     public void setURL(URL url){
         this.songUrl = url;
     }
-    apiUser A = new apiUser("www.google.com");
 }
