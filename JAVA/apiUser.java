@@ -11,18 +11,7 @@ public class apiUser {
     }
     private void setURL(URL url) {
         this.url = url;
-    }
-
-    private void retrieve(URL url, String key) { 
-        if(url == null){
-            throw new IllegalArgumentException("URL cannot be null");
-        }else if(key == null){
-            throw new IllegalArgumentException("Key cannot be null");
-        }else{
-            System.out.println("Retrieving...\n");
-            //TODO FETCH
-        }
-    }
+    }  
 
     apiUser(String param_url){
         try {
@@ -33,5 +22,7 @@ public class apiUser {
         }
         this.key = "key";
     }
+
+    retriever R = new retriever();
 
 }
